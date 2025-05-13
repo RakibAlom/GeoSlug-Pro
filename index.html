@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>GeoSlug Pro - URL Generator Tool</title>
+  <title>GeoSlug Pro – Bulk Keyword + Location URL Generator</title>
   <style>
     * {
       box-sizing: border-box;
@@ -157,7 +157,7 @@
 <body>
 
   <div class="container">
-    <h2>GeoSlug Pro URL Generator Tool</h2>
+    <h2>GeoSlug Pro – Bulk Keyword + Location URL Generator</h2>
 
     <label for="keywords">Keywords:</label>
     <textarea id="keywords" rows="4" placeholder="Enter one keyword per line"></textarea>
@@ -192,7 +192,8 @@
       <p><strong>Key Features:</strong></p>
       <ul>
         <li>Each keyword is paired with every location, creating all possible combinations.</li>
-        <li>The "Middle Part" (default: <code>in</code>) is inserted between keyword and location. If left empty, a hyphen is used.</li>
+        <li>The "Middle Part" (default: <code>in</code>) acts as a connector between the keyword and location. You can use any word like <code>of</code>, <code>at</code>, <code>into</code>, etc. If left empty, a simple hyphen is used instead.</li>
+        <li>An <strong>Initial Global URL</strong> can be set to prefix all generated slugs, creating complete campaign-ready URLs.</li>
         <li>All output is converted to lowercase for SEO consistency.</li>
         <li>Special characters like <code>'</code>, <code>&</code>, <code>@</code>, <code>%</code>, etc. are removed.</li>
         <li>Spaces are converted to hyphens <code>-</code>.</li>
@@ -204,12 +205,14 @@
         <li><code>Lawyer For Estate Law's</code> → <code>lawyer-for-estate-laws</code></li>
         <li><code>Divorce & Family Law</code> → <code>divorce-family-law</code></li>
         <li><code>Lawyer in New York</code> with empty middle → <code>lawyer-new-york</code></li>
+        <li><code>Plumber of Chicago</code> with middle part "of" → <code>plumber-of-chicago</code></li>
       </ul>
 
-      <p>Click <strong>Generate URLs</strong> to see the combinations, then <strong>Copy</strong> to export them easily for your campaign setup.</p>
+      <p>Enter your keywords, locations, middle word (optional), and your base URL to create full URLs. Then click <strong>Generate URLs</strong> to see the combinations. Use <strong>Copy</strong> to export them for campaign setup or content automation.</p>
 
       <p><strong>Developer:</strong> <a href="https://rakibalom.com" target="_blank" rel="noopener noreferrer">Rakib Alom</a></p>
     </div>
+
   </div>
 
   <script>

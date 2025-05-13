@@ -1,4 +1,4 @@
-# GeoSlug Pro - Bulk URL Generator for SEO
+# GeoSlug Pro – Bulk Keyword + Location URL Generator
 
 GeoSlug Pro is a powerful **bulk URL generator** that combines **keywords** with **locations** to generate SEO-optimized, slug-based URLs. It’s perfect for local search marketing, dynamic landing pages, or programmatic SEO.
 

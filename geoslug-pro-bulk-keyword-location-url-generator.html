@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GeoSlug Pro – Bulk Keyword + Location URL Generator</title>
+  <style>
+   * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9fafb;
+      margin: 0;
+      padding: 20px;
+      color: #1f2937;
+    }
+
+    h2, h3 {
+      color: #111827;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      margin-top: 20px;
+    }
+
+    textarea, input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background-color: #f9fafb;
+      transition: border-color 0.2s;
+    }
+
+    textarea:focus, input:focus {
+      border-color: #2563eb;
+      outline: none;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-generate {
+      background-color: #1e40af;
+      color: white;
+    }
+
+    .btn-generate:hover {
+      background-color: #1e3a8a;
+    }
+
+    .btn-copy {
+      background-color: #6b7280;
+      color: white;
+    }
+
+    .btn-copy:hover {
+      background-color: #4b5563;
+    }
+
+    .output {
+      white-space: pre-wrap;
+      margin-top: 20px;
+      background-color: #f3f4f6;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 0.95rem;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .summary {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .summary-item {
+      flex: 1;
+      background: #eff6ff;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-weight: 500;
+      color: #1e3a8a;
+      min-width: 150px;
+      text-align: center;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .footer {
+      margin-top: 40px;
+      background-color: #f9fafb;
+      border-top: 1px solid #e5e7eb;
+      padding: 20px;
+      border-radius: 0 0 16px 16px;
+    }
+
+    .footer h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    .footer p,
+    .footer ul {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #4b5563;
+      margin: 0 0 10px 0;
+      padding: 0 10px;
+    }
+
+    .footer ul {
+      list-style: disc;
+      margin-left: 30px;
+    }
+
+    @media (max-width: 600px) {
+      .summary {
+        flex-direction: column;
+      }
+
+      .button-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>GeoSlug Pro – Bulk Keyword + Location URL Generator</h2>
+
+    <label for="keywords">Keywords:</label>
+    <textarea id="keywords" rows="4" placeholder="Enter one keyword per line"></textarea>
+
+    <label for="locations">Locations:</label>
+    <textarea id="locations" rows="4" placeholder="Enter one location per line"></textarea>
+
+    <label for="middle">Middle Part (default: in):</label>
+    <input type="text" id="middle" value="in">
+
+    <label for="baseUrl">Initial Global URL:</label>
+    <input type="text" id="baseUrl" placeholder="https://example.com/base-url/">
+
+    <div class="button-row">
+      <button class="btn btn-generate" onclick="generateUrls()">Generate URLs</button>
+      <button class="btn btn-copy" id="copyButton" onclick="copyUrls()" style="display: none;">Copy URLs</button>
+    </div>
+
+    <div class="summary" id="summary">
+      <div class="summary-item" id="keywordCount">Keywords: 0</div>
+      <div class="summary-item" id="locationCount">Locations: 0</div>
+      <div class="summary-item" id="urlCount">URLs: 0</div>
+    </div>
+
+    <h3>Generated URLs:</h3>
+    <div class="output" id="output"></div>
+
+    <div class="footer">
+      <h3>How GeoSlug Pro Works</h3>
+      <p><strong>GeoSlug Pro</strong> is a bulk URL generator that combines <strong>keywords</strong> with <strong>locations</strong> to produce SEO-optimized, slug-based URLs for local search marketing, dynamic landing pages, or programmatic SEO.</p>
+
+      <p><strong>Key Features:</strong></p>
+      <ul>
+        <li>Each keyword is paired with every location, creating all possible combinations.</li>
+        <li>The "Middle Part" (default: <code>in</code>) is inserted between keyword and location. If left empty, a hyphen is used.</li>
+        <li>All output is converted to lowercase for SEO consistency.</li>
+        <li>Special characters like <code>'</code>, <code>&</code>, <code>@</code>, <code>%</code>, etc. are removed.</li>
+        <li>Spaces are converted to hyphens <code>-</code>.</li>
+        <li>Multiple consecutive hyphens (like <code>--</code> or <code>---</code>) are reduced to a single one.</li>
+      </ul>
+
+      <p><strong>Examples:</strong></p>
+      <ul>
+        <li><code>Lawyer For Estate Law's</code> → <code>lawyer-for-estate-laws</code></li>
+        <li><code>Divorce & Family Law</code> → <code>divorce-family-law</code></li>
+        <li><code>Lawyer in New York</code> with empty middle → <code>lawyer-new-york</code></li>
+      </ul>
+
+      <p>Click <strong>Generate URLs</strong> to see the combinations, then <strong>Copy</strong> to export them easily for your campaign setup.</p>
+    </div>
+  </div>
+
+  </body>
+  <script>
+    function slugify(text) {
+      return text
+        .toLowerCase()
+        .replace(/&/g, ' ')                  // replace & with space
+        .replace(/[^\w\s-]/g, '')            // remove all non-word characters except hyphen/space
+        .replace(/\s+/g, '-')                // replace spaces with hyphens
+        .replace(/-+/g, '-')                 // replace multiple hyphens with one
+        .trim();
+    }
+
+    function generateUrls() {
+      const keywords = document.getElementById('keywords').value.trim().split('\n').filter(Boolean);
+      const locations = document.getElementById('locations').value.trim().split('\n').filter(Boolean);
+      const middleRaw = document.getElementById('middle').value.trim();
+      const middle = middleRaw === '' ? '-' : `-${slugify(middleRaw)}-`;
+
+      let baseUrl = document.getElementById('baseUrl').value.trim();
+      if (!baseUrl.endsWith('/')) baseUrl += '/';
+
+      const urls = [];
+
+      keywords.forEach(keyword => {
+        locations.forEach(location => {
+          const keywordSlug = slugify(keyword);
+          const locationSlug = slugify(location);
+          const fullUrl = `${baseUrl}${keywordSlug}${middle}${locationSlug}/`;
+          urls.push(fullUrl);
+        });
+      });
+
+      document.getElementById('output').textContent = urls.join('\n');
+      document.getElementById('copyButton').style.display = urls.length > 0 ? 'inline-block' : 'none';
+
+      document.getElementById('keywordCount').textContent = `Keywords: ${keywords.length}`;
+      document.getElementById('locationCount').textContent = `Locations: ${locations.length}`;
+      document.getElementById('urlCount').textContent = `URLs: ${urls.length}`;
+    }
+
+    function copyUrls() {
+      const output = document.getElementById('output').textContent;
+      const copyButton = document.getElementById('copyButton');
+      if (!output) return;
+
+      navigator.clipboard.writeText(output).then(() => {
+        const originalText = copyButton.textContent;
+        copyButton.textContent = '✅ Copied!';
+        copyButton.disabled = true;
+        setTimeout(() => {
+          copyButton.textContent = originalText;
+          copyButton.disabled = false;
+        }, 1000);
+      });
+    }
+  </script>
+</html>

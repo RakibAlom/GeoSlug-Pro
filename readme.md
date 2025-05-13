@@ -1,4 +1,4 @@
-# GeoSlug Pro – Bulk Keyword + Location URL Generator
+# GeoSlug Pro - Bulk URL Generator for SEO
 
 GeoSlug Pro is a powerful **bulk URL generator** that combines **keywords** with **locations** to generate SEO-optimized, slug-based URLs. It’s perfect for local search marketing, dynamic landing pages, or programmatic SEO.
 
@@ -13,6 +13,9 @@ GeoSlug Pro is designed to create URLs based on two primary inputs: **keywords**
   
 - **Middle Part for Customization**:
   - You can add a middle part (default is `in`) between the keyword and location (e.g., `keyword-in-location`). If you leave the middle part empty, it will default to a hyphen (`-`).
+  
+- **Initial Global URL**:
+  - The tool allows you to enter an **Initial Global URL** (e.g., `https://example.com/base-url/`). This base URL is used as the starting point for all generated URLs.
   
 - **SEO Optimization**:
   - All generated URLs are automatically converted to lowercase for SEO consistency.
@@ -34,7 +37,7 @@ GeoSlug Pro is designed to create URLs based on two primary inputs: **keywords**
    - If desired, you can enter a middle part (e.g., `in`), or leave it empty for a hyphen.
    
 4. **Enter Base URL**: 
-   - Provide the initial part of your URL (e.g., `https://example.com/`).
+   - Provide the **Initial Global URL** (e.g., `https://example.com/`).
 
 5. **Generate URLs**: 
    - Click the **Generate URLs** button to see all the combinations.
